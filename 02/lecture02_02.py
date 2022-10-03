@@ -17,22 +17,22 @@ def lecture02_02() -> None:
             chapter.attrib['id'] = str(i) 
             if i == 1 :
                   chapter.attrib['name'] = str("はじめに")
-                  chapter.attrib['pages'] = str("2")
+                  chapter.attrib['pages'] = str("2 ")
             if i == 2 :
                   chapter.attrib['name'] = str("基礎理論")
-                  chapter.attrib['pages'] = str("8") 
+                  chapter.attrib['pages'] = str("8 ") 
             if i == 3 :
                   chapter.attrib['name'] = str("実験方法")
-                  chapter.attrib['pages'] = str("6") 
+                  chapter.attrib['pages'] = str("6 ") 
             if i == 4 :
                   chapter.attrib['name'] = str("結果と考察")
-                  chapter.attrib['pages'] = str("2") 
+                  chapter.attrib['pages'] = str("2 ") 
             if i == 5 :
                   chapter.attrib['name'] = str("まとめ")
-                  chapter.attrib['pages'] = str("1") 
+                  chapter.attrib['pages'] = str("1 ") 
             if i == 6 :
                   chapter.attrib['name'] = str("参考文献")
-                  chapter.attrib['pages'] = str("2") 
+                  chapter.attrib['pages'] = str("2 ") 
             articles.append(chapter)
       
       novel = ET.SubElement(book, 'novel')
