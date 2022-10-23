@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QGridLayout
 from PySide6 import QtGui
@@ -49,16 +47,6 @@ class GameButton(QPushButton):
                   if result[0] == result[1] == result[2] == "×":
                         print("×の勝ち")
                         [btn.setStyleSheet("color : #ff0000;") for btn in btns]
-            
-            # for i in patterns:
-            #       if result[patterns[i][0]] == result[patterns[i][1]] == result[patterns[i][2]] == "○":
-            #             print("○の勝ち")
-            #             [btn.setStyleSheet("color : #ff0000;") for btn in btns]
-            #       if result[patterns[i][0]] == result[patterns[i][1]] == result[patterns[i][2]] == "×":
-            #             print("×の勝ち")
-            #             [btn.setStyleSheet("color : #ff0000;") for btn in btns]
-            
-      
 
 class MainWidget(QWidget):
       def __init__(self):
