@@ -39,7 +39,7 @@ class GameButton(QPushButton):
             [2,4,6]
         ]
 
-        btns : list[GameButton] = [self.buttons[i] for i in patterns[0]]
+        btns : list[GameButton] = [self.buttons[i] for i in patterns[7]]
         result = [btn.text() for btn in btns]
         if result[0] == result[1] == result[2] == "○":
             print("○の勝ち")
