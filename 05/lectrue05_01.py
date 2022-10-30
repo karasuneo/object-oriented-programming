@@ -36,6 +36,9 @@ class MainWidget(QWidget):
             layout3 = QGridLayout()
             self.update_btn = QPushButton()
             self.update_btn.setText("更新")
+            # 追加
+            self.update_btn.clicked.connect(self.__btn_update)
+            # ここまで
             self.update_btn.setFont(QtGui.QFont('Arial', 20))
             layout3.addWidget(self.update_btn, 0,0)
             layouts = QGridLayout()
@@ -93,14 +96,19 @@ class MainWidget(QWidget):
             row = btn_index%3
             message = self.game_model.update(col, row, self.mark)
             self.mark = 3 - self.mark
-            self.__show_game_state()
             self.top_label.setText(message)
+            
+      # 追加
+      def __btn_update(self):
+            self.__show_game_state()
+      # ここまで
 
 if __name__ == "__main__":
       game_model = GameModel()
       app = QApplication(sys.argv)
       mw = MainWidget(game_model)
       mw.show()
-      # mw2 = MainWidget(game_model)
-      # mw2.show()
+      mw2 = MainWidget(game_model)
+      mw2.show()
       app.exec()
+
