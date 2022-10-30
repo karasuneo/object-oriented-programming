@@ -17,7 +17,7 @@ class MainWidget(QWidget):
             self.top_label.setFont(QtGui.QFont('Arial', 20))
             self.top_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             self.buttons = [QPushButton() for _ in range(9)]
-            [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
+            # [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
             self.buttons[0].clicked.connect(self.__click_0_0)
             self.buttons[1].clicked.connect(self.__click_0_1)
             self.buttons[2].clicked.connect(self.__click_0_2)
@@ -27,6 +27,9 @@ class MainWidget(QWidget):
             self.buttons[6].clicked.connect(self.__click_2_0)
             self.buttons[7].clicked.connect(self.__click_2_1)
             self.buttons[8].clicked.connect(self.__click_2_2)
+            
+            [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
+            
             layout1 = QGridLayout()
             layout1.addWidget(self.top_label,0,0)
             layout2 = QGridLayout()
@@ -37,7 +40,7 @@ class MainWidget(QWidget):
             self.update_btn = QPushButton()
             self.update_btn.setText("更新")
             # 追加
-            self.update_btn.clicked.connect(self.__btn_update)
+            self.update_btn.clicked.connect(self.__update_event)
             # ここまで
             self.update_btn.setFont(QtGui.QFont('Arial', 20))
             layout3.addWidget(self.update_btn, 0,0)
@@ -47,10 +50,8 @@ class MainWidget(QWidget):
             layouts.addLayout(layout3, 2,0)
             self.setLayout(layouts)
 
-            self.__show_game_state()
-
       def __show_game_state(self):
-            print(self.game_model.get_game_state())
+            # print(self.game_model.get_game_state())
             game_state = self.game_model.get_game_state()
             array = game_state[0] + game_state[1] + game_state[2]
             [btn.setText("" if state==0 else "○" if state==1 else "x") for btn, state in zip(self.buttons,array)]
@@ -97,9 +98,9 @@ class MainWidget(QWidget):
             message = self.game_model.update(col, row, self.mark)
             self.mark = 3 - self.mark
             self.top_label.setText(message)
-            
+
       # 追加
-      def __btn_update(self):
+      def __update_event(self):
             self.__show_game_state()
       # ここまで
 
@@ -107,8 +108,9 @@ if __name__ == "__main__":
       game_model = GameModel()
       app = QApplication(sys.argv)
       mw = MainWidget(game_model)
-      mw.show()
+      # 追加
       mw2 = MainWidget(game_model)
       mw2.show()
+      # ここまで
+      mw.show()
       app.exec()
-
