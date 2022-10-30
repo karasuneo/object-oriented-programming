@@ -17,7 +17,7 @@ class MainWidget(QWidget):
             self.top_label.setFont(QtGui.QFont('Arial', 20))
             self.top_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             self.buttons = [QPushButton() for _ in range(9)]
-            # [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
+            [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
             self.buttons[0].clicked.connect(self.__click_0_0)
             self.buttons[1].clicked.connect(self.__click_0_1)
             self.buttons[2].clicked.connect(self.__click_0_2)
@@ -27,9 +27,6 @@ class MainWidget(QWidget):
             self.buttons[6].clicked.connect(self.__click_2_0)
             self.buttons[7].clicked.connect(self.__click_2_1)
             self.buttons[8].clicked.connect(self.__click_2_2)
-            
-            [btn.setFont(QtGui.QFont('Arial', 40)) for btn in self.buttons]
-            
             layout1 = QGridLayout()
             layout1.addWidget(self.top_label,0,0)
             layout2 = QGridLayout()
