@@ -35,8 +35,8 @@ def lecture07_01():
                               laplacian_mask[y, x] = np.copy(red_mask)
 
             # for debug
-            cv2.imshow('frame1',laplacian)
-            cv2.imshow('frame2',laplacian_mask)
+            # cv2.imshow('frame1',laplacian)
+            # cv2.imshow('frame2',laplacian_mask)
             
             
             fgmask = fgbg.apply(resized_frame)

@@ -5,7 +5,7 @@ import sys
 class GameModel():
       def __init__(self):
             self.__initialize()
-    
+
       def __initialize(self) :
             self.state = {}
             self.state["game_state"] = [
