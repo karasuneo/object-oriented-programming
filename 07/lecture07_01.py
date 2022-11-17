@@ -28,24 +28,35 @@ def lecture07_01():
 
             frame_gray = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2GRAY)
             laplacian = cv2.Laplacian(frame_gray, cv2.CV_64F) #ラプラシアン値
-            # for y in range(rows):
-            #     for x in range(cols):
-            #         if laplacian[y,x] > 10:
-            #             # implement me
-            #             laplacian_mask***** = np.copy(red_mask)
+            for y in range(rows):
+                  for x in range(cols):
+                        if laplacian[y,x] > 10:
+                              # implement me
+                              laplacian_mask[y, x] = np.copy(red_mask)
 
             # for debug
-            # cv2.imshow('frame',laplacian, cmap='gray')
-            # cv2.imshow('frame',laplacian_mask)
-
+            cv2.imshow('frame1',laplacian)
+            cv2.imshow('frame2',laplacian_mask)
+            
+            
             fgmask = fgbg.apply(resized_frame)
-            # fgmask_sum = "implement me"
-            # fgmask_mean = "implement me"
-            # for y in range(int(rows/REGION_HIGH)):
-            #     for x in range(int(cols/REGION_WIDTH)):
-            #         if fgmask_sum[x][y] >= fgmask_mean:
-            #             # implement me
-            #             fgmask_mask******************** = np.copy(white_mask)
+            print(rows/REGION_HIGH)
+            print(cols/REGION_WIDTH)
+            fgmask_sum = np.zeros((int(rows/REGION_HIGH), int(cols/REGION_WIDTH))) 
+            fgmask_sum = np.zeros((100, 41)) 
+            for i in range(int(rows/REGION_HIGH)):
+                  for j in range(int(cols/REGION_WIDTH)):
+                        for y in range(REGION_HIGH):
+                              for x in range(REGION_WIDTH):
+                                    if (fgmask[i*16+y][j*16+x]==255):#1画素ずつ白かどうかの判定
+                                          fgmask_sum[i,j] += 1
+            fgmask_mean = np.mean(fgmask_sum)#全領域の白の要素の平均
+
+            for y in range(int(rows/REGION_HIGH)):
+                  for x in range(int(cols/REGION_WIDTH)):
+                        if fgmask_sum[x][y] >= fgmask_mean:
+                              # implement me
+                              fgmask_mask[16*y:16*y+16,16*x:16*x+16] = np.copy(white_mask)
 
             # for debug
             # cv2.imshow('frame',fgmask)
