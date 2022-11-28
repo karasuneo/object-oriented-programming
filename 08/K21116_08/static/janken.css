@@ -94,6 +94,10 @@ h1 {
   color: #fff;
 }
 
+h2 {
+  color: red;
+}
+
 section {
   display: flex;
   justify-content: center;
@@ -110,4 +114,8 @@ figure figcaption {
 
 main h2 {
   text-align: center;
+}
+
+.settai {
+  font-size: 16px;
 }
