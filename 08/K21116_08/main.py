@@ -9,18 +9,22 @@ def index():
       return render_template('index.html')
 
 
-# 2. じゃんけんアプリの入力フォーム
+# 2. じゃんけんアプリ, 占いアプリの入力フォーム
 @app.route('/janken')
 def janken():
       # じゃんけんの入力画面のテンプレートを呼び出し
       return render_template('janken_form.html')
 
+@app.route('/uranai')
+def uranai():
+      # 占いの入力画面のテンプレートを呼び出し
+      return render_template('uranai_form.html')
+
 
 # 3. じゃんけんデータ送信先とじゃんけん結果表示画面
 @app.route('/janken/play', methods=["POST"])
-@app.route('/janken/play', methods=["POST"])
+@app.route('/uranai/play', methods=["POST"])
 def janken_play():
-
       # <input type="text" id="your_name" name="name">
       name = request.form.get("name")
       if not name:
@@ -85,6 +89,10 @@ def janken_play():
             name=name,
             hand=hand,
             cpu=cpu)
+
+def uranai_play():
+      # 渡したいデータを先に定義しておいてもいいし、テンプレートを先に作っておいても良い
+      return render_template('uranai_play.html')
 
 if __name__ == '__main__':
       app.run(debug=True)
