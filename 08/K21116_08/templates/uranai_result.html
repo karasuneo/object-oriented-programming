@@ -2,47 +2,42 @@
 <html lang="ja">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>じゃんけんゲーム - 結果</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='janken.css') }}">
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>占い - 結果</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='janken.css') }}" />
 </head>
 
 <body>
       <main>
-            <h1>ぽん！</h1>
-            <section>
-                  <figure>
-                        {% if hand == "rock" %}
-                        <img src="{{ url_for('static', filename='janken_gu.png') }}" alt="Rock" width="150">
-                        {% elif hand == "scissor" %}
-                        <img src="{{ url_for('static', filename='janken_choki.png') }}" alt="Scissor" width="150">
-                        {% elif hand == "paper" %}
-                        <img src="{{ url_for('static', filename='janken_pa.png') }}" alt="Paper" width="150">
-                        {% else %}
-                        <img src="{{ url_for('static', filename='mark_batsu.png') }}" alt="Batsu" width="150">
-                        {% endif %}
-                        <figcaption>
-                              {{ name }}
-                        </figcaption>
-                  </figure>
-                  <figure>
-                        {% if cpu == "rock" %}
-                        <img src="{{ url_for('static', filename='janken_gu.png') }}" alt="Rock" width="150">
-                        {% elif cpu == "scissor" %}
-                        <img src="{{ url_for('static', filename='janken_choki.png') }}" alt="Scissor" width="150">
-                        {% elif cpu == "paper" %}
-                        <img src="{{ url_for('static', filename='janken_pa.png') }}" alt="Paper" width="150">
-                        {% else %}
-                        <img src="{{ url_for('static', filename='mark_batsu.png') }}" alt="Batsu" width="150">
-                        {% endif %}
-                        <figcaption>
-                              CPU
-                        </figcaption>
-                  </figure>
-            </section>
+            <figure>
+                  {% if result == 1 %}
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Rock" width="150" />
+                  {% elif result == 2 %}
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Scissor" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Scissor" width="150" />
+                  {% elif result == 3 %}
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Paper" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Paper" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Paper" width="150" />
+                  {% elif result == 4 %}
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  {% elif result == 5 %}
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  <img src="{{ url_for('static', filename='uranai_lemon.png') }}" alt="Batsu" width="150" />
+                  {% endif %}
+                  <figcaption>{{ name }}</figcaption>
+            </figure>
             <h2>{{ result_message }}</h2>
-            <button onclick="javascript:window.history.back(-1);return false;">戻る</button>
+            <button onclick="javascript:window.history.back(-1);return false;">
+                  戻る
+            </button>
       </main>
 </body>
 

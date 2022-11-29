@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import random # ランダムデータ作成のためのライブラリ
+import datetime # 現在日時取得のライブラリ
 
 app = Flask(__name__)
 
@@ -23,7 +24,63 @@ def uranai():
 
 # 3. じゃんけんデータ送信先とじゃんけん結果表示画面
 @app.route('/janken/play', methods=["POST"])
-@app.route('/uranai/play', methods=["POST"])
+@app.route('/uranai/result', methods=["POST"])
+def uranai_result():
+      # 現在日時を取得するメソッドの定義
+      dt_now = datetime.datetime.now()
+      
+      # htmlから受け取った値をパース
+      name = request.form.get("name")
+      birthday = request.form.get("birthday")
+      
+      if not name or not birthday:
+            result = 1
+            result_message = "入力不備で占えませんでした"
+            
+            return render_template('uranai_result.html',
+            result=result,
+            result_message=result_message,
+            )
+            
+      
+      print("sssss")
+      print(birthday)
+      
+      # 現在日付をyyyyMMdd形式で数値化する
+      birthday_num = birthday.replace('-', '')
+      
+      # 生年月日をyyyyMMdd形式で数値化するç
+      currentday_num = str(dt_now.year) + str(dt_now.month) + str(dt_now.day)
+      
+      # 数値化した現在日付から生年月日を減算し、結果の絶対値を算出する
+      date_diff = abs(int(birthday_num) - int(currentday_num))
+      
+      #「減算結果の絶対値」と「名前の文字数」を掛け算にて算出する
+      pro = date_diff * len(name)
+      
+      #「掛け算結果を5で割った余り」をList:[5, 1, 3, 2, 4]のインデックスとして使用し取り出した数値要素を占い結果とする
+      result_list = [5, 1, 3, 2, 4]
+      rem = pro % 5
+      result = result_list[rem]
+      
+      # 1〜5の数値で得られる5段階の占い結果に対して、それぞれ各段階における適当なメッセージも添えること
+      if result == 1:
+            result_message = "すごく不幸だね"
+      elif result == 2:
+            result_message = "不幸だね"
+      elif result == 3:
+            result_message = "普通だね"
+      elif result == 4:
+            result_message = "幸運だね"
+      elif result == 5:
+            result_message = "すごく幸運だね"
+
+      # 渡したいデータを先に定義しておいてもいいし、テンプレートを先に作っておいても良い
+      return render_template('uranai_result.html',
+            result=result,
+            result_message=result_message,
+            )
+
 def janken_play():
       # <input type="text" id="your_name" name="name">
       name = request.form.get("name")
@@ -34,7 +91,6 @@ def janken_play():
       mode = request.form.get("mode")
       if not mode:
             mode = "standard"
-      print(mode)
       
       # <input type="radio" id="hand_rock" value="rock" name="hand">
       # <input type="radio" id="hand_scissor" value="scissor" name="hand">
@@ -66,7 +122,6 @@ def janken_play():
                               result_message = "{}の負け".format(name)
                   else:
                         result_message = "後出しはダメです。"
-
       elif mode == "settai":
             # じゃんけん処理
             if hand == "rock":
@@ -90,9 +145,13 @@ def janken_play():
             hand=hand,
             cpu=cpu)
 
-def uranai_play():
-      # 渡したいデータを先に定義しておいてもいいし、テンプレートを先に作っておいても良い
-      return render_template('uranai_play.html')
+# def uranai_result():
+#       birthday = request.form.get("birthday")
+#       print("sssss")
+#       print(birthday)
+      
+#       # 渡したいデータを先に定義しておいてもいいし、テンプレートを先に作っておいても良い
+#       return render_template('uranai_result.html')
 
 if __name__ == '__main__':
       app.run(debug=True)
