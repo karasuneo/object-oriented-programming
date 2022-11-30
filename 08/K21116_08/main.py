@@ -33,6 +33,7 @@ def uranai_result():
       name = request.form.get("name")
       birthday = request.form.get("birthday")
       
+      # 生年月日が未入力またが名前が未入力の時入力不備で占えませんでしたとする
       if not name or not birthday:
             result = 1
             result_message = "入力不備で占えませんでした"
@@ -41,11 +42,7 @@ def uranai_result():
             result=result,
             result_message=result_message,
             )
-            
-      
-      print("sssss")
-      print(birthday)
-      
+
       # 現在日付をyyyyMMdd形式で数値化する
       birthday_num = birthday.replace('-', '')
       
