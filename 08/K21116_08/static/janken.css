@@ -94,7 +94,7 @@ h1 {
   color: #fff;
 }
 
-h2 {
+h2[result*="勝ち"] {
   color: red;
 }
 
@@ -119,3 +119,4 @@ main h2 {
 .settai {
   font-size: 16px;
 }
+
