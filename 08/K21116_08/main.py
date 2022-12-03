@@ -112,7 +112,7 @@ def uranai_result():
       # 現在日付をyyyyMMdd形式で数値化する
       birthday_num = birthday.replace('-', '')
       
-      # 生年月日をyyyyMMdd形式で数値化するç
+      # 生年月日をyyyyMMdd形式で数値化する
       currentday_num = str(dt_now.year) + str(dt_now.month) + str(dt_now.day)
       
       # 数値化した現在日付から生年月日を減算し、結果の絶対値を算出する
