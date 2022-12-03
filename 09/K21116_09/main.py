@@ -10,9 +10,9 @@ app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列
 def address_get():
 
       # 検索パラメータの取得
-      p_first_name = request.form.get('fn', None)
-      p_last_name = request.form.get('ln', None)
-      p_email = request.form.get('em', None)
+      p_first_name = request.args.get('fn', None)
+      p_last_name = request.args.get('ln', None)
+      p_email = request.args.get('em', None)
 
       with open('address.json') as f:
             json_data = json.load(f)

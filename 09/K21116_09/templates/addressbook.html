@@ -2,13 +2,13 @@
 <html lang="ja">
 
 <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>アドレス帳</title>
 
       <!-- new.css -->
-      <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css" />
+      <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
 
       <!-- メッセージ表示用のCSSを定義 -->
       <style>
@@ -37,9 +37,9 @@
             <section>
                   <form id="search">
                         <div>
-                              <input type="text" id="search-firstname" placeholder="First name" name="fn" />
-                              <input type="text" id="search-lastname" placeholder="Last name" name="ln" />
-                              <input type="text" id="search-email" placeholder="Email address" name="em" />
+                              <input type="text" id="search-firstname" placeholder="First name" name="fn">
+                              <input type="text" id="search-lastname" placeholder="Last name" name="ln">
+                              <input type="text" id="search-email" placeholder="Email address" name="em">
                               <button id="search-submit">Search</button>
                         </div>
                   </form>
@@ -52,23 +52,25 @@
                               <th scope="col">Email</th>
                         </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+
+                  </tbody>
             </table>
 
             <section>
                   <h3>データの追加</h3>
                   <form id="add">
                         <div>
-                              <input required type="text" id="add-firstname" placeholder="First name" name="fn" />
-                              <input required type="text" id="add-lastname" placeholder="Last name" name="ln" />
-                              <input required type="text" id="add-email" placeholder="Email address" name="em" />
+                              <input required type="text" id="add-firstname" placeholder="First name" name="fn">
+                              <input required type="text" id="add-lastname" placeholder="Last name" name="ln">
+                              <input required type="text" id="add-email" placeholder="Email address" name="em">
                               <button id="add-submit">Add</button>
                         </div>
                   </form>
 
                   <!-- メッセージの表示領域 （サンプルでは使いません。課題のタイミングで使用してもOKです。） -->
-                  <div id="message-container" role="alert" style="display: none"></div>
-                  <div id="error-container" role="alert" style="display: none"></div>
+                  <div id="message-container" role="alert" style="display: none;"></div>
+                  <div id="error-container" role="alert" style="display: none;"></div>
             </section>
       </main>
 </body>

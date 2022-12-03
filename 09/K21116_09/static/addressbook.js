@@ -46,14 +46,15 @@ searchButton.addEventListener("click", (ev) => {
   // <input type="text" id="search-email" placeholder="Email address" name="em" />
   const em = document.querySelector("#search-email").value;
 
-  const param = new URLSearchParams();
-  if (fn !== "") param.append("fn", fn);
-  if (ln !== "") param.append("ln", ln);
-  if (em !== "") param.append("em", em);
+  const params = new URLSearchParams();
+
+  if (fn && fn !== "") params.set("fn", fn);
+  if (ln && ln !== "") params.set("ln", ln);
+  if (em && em !== "") params.set("em", em);
 
   // 検索ごとに、<table id="address-list">〜</table>内の<tbody>〜</tbody>内部はクリアされて結果が表示される
   // データの初期表示
-  fetch("/address").then((response) => {
+  fetch("/address?" + params.toString()).then((response) => {
     console.log(response);
     response.json().then((data) => {
       // console.log(data); // 取得されたレスポンスデータをデバッグ表示
@@ -69,12 +70,6 @@ searchButton.addEventListener("click", (ev) => {
         tableBody.appendChild(tr);
         return;
       }
-      console.log("sasa");
-
-      // データを削除させる
-      // while (tableBody.firstChild) {
-      //   tableBody.removeChild(tableBody.firstChild);
-      // }
 
       data.forEach((elm) => {
         let tr = document.createElement("tr");
