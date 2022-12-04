@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, jsonify
 import json  # Python標準のJSONライブラリを読み込んで、データの保存等に使用する
-from dictknife import deepmerge
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
@@ -39,13 +38,21 @@ def address_set():
       add_address = {"email": email, "first_name": first_name, "last_name": last_name}
 
       with open('address.json') as f:
-            json_data = json.load(f)
-
+            try:
+                  json_data = json.load(f)
+            except ValueError:
+                  json_error = {'error': "問題が起こりました"}
+                  return json_error 
       json_data.append(add_address)
 
       with open('address.json', 'w') as f:
-            json.dump(json_data, f)
-
+            try:
+                  json.dump(json_data, f)
+            except ValueError:
+                  json_error = {'error': "問題が起こりました"}
+                  return json_error
+            
+      
       return jsonify(json_data)
 
 # データの表示

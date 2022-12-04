@@ -94,10 +94,14 @@ searchButton.addEventListener("click", (ev) => {
 });
 
 const addButton = document.querySelector("#add-submit");
-addButton.addEventListener("click", () => {
-  const fn = document.getElementById("add-firstname").value;
-  const ln = document.getElementById("add-lastname").value;
-  const em = document.getElementById("add-email").value;
+addButton.addEventListener("click", (e) => {
+  // ボタンイベントのキャンセル
+  e.preventDefault();
+
+  // 入力チェック
+  let fn = document.getElementById("add-firstname").value;
+  let ln = document.getElementById("add-lastname").value;
+  let em = document.getElementById("add-email").value;
 
   // 未入力がある項目ごとにエラーメッセージを積み上げる
   let error_message = "";
@@ -115,15 +119,20 @@ addButton.addEventListener("click", () => {
     document.getElementById("error-container").style.display = "none";
   }
 
+
+  // データ送信
   let data = new FormData();
   data.append("fn", fn);
   data.append("ln", ln);
   data.append("em", em);
 
+  
+
   fetch("/address", {
     method: "POST",
     body: data,
   }).then((response) => {
+    
     // 入力項目の初期化
     document.getElementById("add").reset();
 
@@ -131,20 +140,22 @@ addButton.addEventListener("click", () => {
     document.getElementById("error-container").innerHTML = "";
     document.getElementById("error-container").style.display = "none";
     // 登録メッセージ等の表示領域を初期化
-    document.getElementById("message-container").innerHTML = "";
-    document.getElementById("message-container").style.display = "none";
+    // document.getElementById("message-container").innerHTML = "";
+    // document.getElementById("message-container").style.display = "none";
 
     // レスポンスデータからJSONを取り出し
     response.json().then((data) => {
+      console.log(data.result)
       if (data.error) {
         // エラーの受信
         document.getElementById("error-container").innerHTML = data.error;
         document.getElementById("error-container").style.display = "block";
       }
 
-      if (data.result) {
+      else {
+        
         // メッセージの受信
-        document.getElementById("message-container").innerHTML = data.result;
+        document.getElementById("message-container").innerHTML = "登録が完了しました";
         document.getElementById("message-container").style.display = "block";
         if (data.json_data) {
           show_data(data.json_data);
