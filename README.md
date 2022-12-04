@@ -27,3 +27,6 @@
 
 ## 第八回
 - Webアプリ作った(flaskで)
+
+## 第9回
+- Webアプリ作った(flaskとjavascriptで)
