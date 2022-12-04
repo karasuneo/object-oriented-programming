@@ -1,10 +1,10 @@
 from flask import Flask, request, render_template, jsonify
 import json  # Python標準のJSONライブラリを読み込んで、データの保存等に使用する
+from dictknife import deepmerge
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
 
-# データの登録
 # http://127.0.0.1:5000/address
 @app.route('/address', methods=["GET"])
 def address_get():
@@ -24,6 +24,27 @@ def address_get():
             json_data = list(filter(lambda item: p_last_name.lower() in item["last_name"].lower(), json_data))
       if p_email is not None:
             json_data = list(filter(lambda item: p_email.lower() in item["email"].lower(), json_data))
+
+      return jsonify(json_data)
+
+# データの登録
+# http://127.0.0.1:5000/address
+@app.route('/address', methods=["POST"])
+def address_set():
+
+      first_name = request.form.get('fn')
+      last_name = request.form.get('ln')
+      email = request.form.get('em')
+
+      add_address = {"email": email, "first_name": first_name, "last_name": last_name}
+
+      with open('address.json') as f:
+            json_data = json.load(f)
+
+      json_data.append(add_address)
+
+      with open('address.json', 'w') as f:
+            json.dump(json_data, f)
 
       return jsonify(json_data)
 
