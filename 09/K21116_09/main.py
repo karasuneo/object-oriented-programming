@@ -7,7 +7,6 @@ app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列
 # http://127.0.0.1:5000/address
 @app.route('/address', methods=["GET"])
 def address_get():
-
       # 検索パラメータの取得
       p_first_name = request.args.get('fn', None)
       p_last_name = request.args.get('ln', None)
@@ -30,7 +29,6 @@ def address_get():
 # http://127.0.0.1:5000/address
 @app.route('/address', methods=["POST"])
 def address_set():
-
       first_name = request.form.get('fn')
       last_name = request.form.get('ln')
       email = request.form.get('em')
@@ -41,19 +39,22 @@ def address_set():
             try:
                   json_data = json.load(f)
             except ValueError:
-                  json_error = {'error': "問題が起こりました"}
-                  return json_error 
+                  res = {'error': "問題が起こりました"}
+                  return res
+            
       json_data.append(add_address)
 
       with open('address.json', 'w') as f:
             try:
                   json.dump(json_data, f)
             except ValueError:
-                  json_error = {'error': "問題が起こりました"}
-                  return json_error
-            
-      
-      return jsonify(json_data)
+                  res = {'error': "問題が起こりました"}
+                  return res
+
+      res = {"result": "登録が完了しました", "json_data": json_data}
+
+      return res
+      # return jsonify(json_data)
 
 # データの表示
 # http://127.0.0.1:5000/

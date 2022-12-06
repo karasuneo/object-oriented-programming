@@ -4,26 +4,7 @@ fetch("/address").then((response) => {
   response.json().then((data) => {
     console.log(data); // 取得されたレスポンスデータをデバッグ表示
     // データを表示させる
-    const tableBody = document.querySelector("#address-list > tbody");
-    data.forEach((elm) => {
-      // 1行づつ処理を行う
-      let tr = document.createElement("tr");
-      // first name
-      let td = document.createElement("td");
-      td.innerText = elm.first_name;
-      tr.appendChild(td);
-      // last name
-      td = document.createElement("td");
-      td.innerText = elm.last_name;
-      tr.appendChild(td);
-      // email
-      td = document.createElement("td");
-      td.innerText = elm.email;
-      tr.appendChild(td);
-
-      // 1行分をtableタグ内のtbodyへ追加する
-      tableBody.appendChild(tr);
-    });
+    show_data(data);
   });
 });
 
@@ -119,20 +100,16 @@ addButton.addEventListener("click", (e) => {
     document.getElementById("error-container").style.display = "none";
   }
 
-
   // データ送信
   let data = new FormData();
   data.append("fn", fn);
   data.append("ln", ln);
   data.append("em", em);
 
-  
-
   fetch("/address", {
     method: "POST",
     body: data,
   }).then((response) => {
-    
     // 入力項目の初期化
     document.getElementById("add").reset();
 
@@ -140,22 +117,19 @@ addButton.addEventListener("click", (e) => {
     document.getElementById("error-container").innerHTML = "";
     document.getElementById("error-container").style.display = "none";
     // 登録メッセージ等の表示領域を初期化
-    // document.getElementById("message-container").innerHTML = "";
-    // document.getElementById("message-container").style.display = "none";
+    document.getElementById("message-container").innerHTML = "";
+    document.getElementById("message-container").style.display = "none";
 
     // レスポンスデータからJSONを取り出し
     response.json().then((data) => {
-      console.log(data.result)
+      console.log(data.result);
       if (data.error) {
         // エラーの受信
         document.getElementById("error-container").innerHTML = data.error;
         document.getElementById("error-container").style.display = "block";
-      }
-
-      else {
-        
+      } else if (data.result) {
         // メッセージの受信
-        document.getElementById("message-container").innerHTML = "登録が完了しました";
+        document.getElementById("message-container").innerHTML = data.result;
         document.getElementById("message-container").style.display = "block";
         if (data.json_data) {
           show_data(data.json_data);
@@ -164,3 +138,37 @@ addButton.addEventListener("click", (e) => {
     });
   });
 });
+
+// データ表示を関数化
+const show_data = (data) => {
+  // データを表示させる
+  const tableBody = document.querySelector("#address-list > tbody");
+  tableBody.innerHTML = "";
+
+  // レスポンスのJSONデータの件数が0だった場合
+  if (data && data.length == 0) {
+    let tr = document.createElement("tr");
+    tr.innerHTML = "表示するデータがありません。";
+    tableBody.appendChild(tr);
+    return;
+  }
+
+  data.forEach((elm) => {
+    let tr = document.createElement("tr");
+    // first name
+    let td = document.createElement("td");
+    td.textContent = elm.first_name;
+    tr.appendChild(td);
+    // last name
+    td = document.createElement("td");
+    td.textContent = elm.last_name;
+    tr.appendChild(td);
+    // email
+    td = document.createElement("td");
+    td.textContent = elm.email;
+    tr.appendChild(td);
+
+    // 1行分をtableタグ内のtbodyへ追加する
+    tableBody.appendChild(tr);
+  });
+};
