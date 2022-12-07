@@ -44,7 +44,6 @@ def address_set():
             
       json_data.append(add_address)
 
-
       try:
             with open('address.json', 'w') as f:
                   json.dump(json_data, f)
@@ -55,7 +54,6 @@ def address_set():
       res = {"result": "登録が完了しました", "json_data": json_data}
 
       return res
-      # return jsonify(json_data)
 
 # データの表示
 # http://127.0.0.1:5000/
