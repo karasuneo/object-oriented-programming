@@ -35,21 +35,22 @@ def address_set():
 
       add_address = {"email": email, "first_name": first_name, "last_name": last_name}
 
-      with open('address.json') as f:
-            try:
+      try:
+            with open('address.json') as f:
                   json_data = json.load(f)
-            except ValueError:
-                  res = {'error': "問題が起こりました"}
-                  return res
+      except ValueError:
+            res = {'error': "問題が起こりました"}
+            return res
             
       json_data.append(add_address)
 
-      with open('address.json', 'w') as f:
-            try:
+
+      try:
+            with open('address.json', 'w') as f:
                   json.dump(json_data, f)
-            except ValueError:
-                  res = {'error': "問題が起こりました"}
-                  return res
+      except ValueError:
+            res = {'error': "問題が起こりました"}
+            return res
 
       res = {"result": "登録が完了しました", "json_data": json_data}
 
